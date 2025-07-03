@@ -4,10 +4,9 @@ import os
 from magic_filter import F
 
 from maxo import Bot, Dispatcher, Router
-from maxo.builders import KeyboardBuilder
-from maxo.facades import MessageCallbackFacade, MessageCreatedFacade
-from maxo.filters.command import CommandStart
-from maxo.filters.magic_filter import MagicFilter
+from maxo.alta.builders import KeyboardBuilder
+from maxo.alta.facades import MessageCallbackFacade, MessageCreatedFacade
+from maxo.routing.filters import CommandStart, MagicFilter
 from maxo.types import MessageCallback, MessageCreated
 
 router = Router(__name__)

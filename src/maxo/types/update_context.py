@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from maxo.types.chat import Chat
-from maxo.types.user.user import User
+from maxo.types.types.chat import Chat
+from maxo.types.types.user import User
 
 
 @dataclass(frozen=True, slots=True)

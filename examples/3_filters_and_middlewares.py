@@ -3,9 +3,9 @@ import os
 from typing import Any
 
 from maxo import Bot, Ctx, Dispatcher
-from maxo.facades import MessageCreatedFacade
-from maxo.filters import Filter
-from maxo.middlewares import Middleware, NextMiddleware
+from maxo.alta.facades import MessageCreatedFacade
+from maxo.routing.filters import Filter
+from maxo.routing.middlewares import Middleware, NextMiddleware
 from maxo.types import MessageCreated
 
 bot = Bot(os.environ["TOKEN"])

@@ -1,7 +1,7 @@
 from maxo.bot.bot import Bot
-from maxo.dispatcher.ctx import Ctx
-from maxo.dispatcher.dispatcher import Dispatcher
-from maxo.dispatcher.router import Router
+from maxo.routing.dispatcher.ctx import Ctx
+from maxo.routing.dispatcher.dispatcher import Dispatcher
+from maxo.routing.dispatcher.router import Router
 
 __all__ = [
     "Bot",

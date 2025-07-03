@@ -7,40 +7,40 @@ from retejo.interfaces import AsyncSendableMethod
 from typing_extensions import Self
 
 from maxo.bot.api_client import MaxApiClient
+from maxo.bot.methods.bots.edit_me import EditMe
+from maxo.bot.methods.bots.get_me import GetMe
+from maxo.bot.methods.chats.add_chat_members import AddChatMembers
+from maxo.bot.methods.chats.delete_chat import DeleteChat
+from maxo.bot.methods.chats.delete_chat_member import DeleteChatMember
+from maxo.bot.methods.chats.delete_pin_message import DeletePinMessage
+from maxo.bot.methods.chats.edit_chat import EditChat
+from maxo.bot.methods.chats.get_chat import GetChat
+from maxo.bot.methods.chats.get_chat_by_link import GetChatByLink
+from maxo.bot.methods.chats.get_chat_members import GetChatMembers
+from maxo.bot.methods.chats.get_chats import GetChats
+from maxo.bot.methods.chats.get_message_pin import GetMessagePin
+from maxo.bot.methods.chats.pin_message import PinMessage
+from maxo.bot.methods.chats.remove_me_chat import RemoveMeChat
+from maxo.bot.methods.chats.revoke_administrator_rights import (
+    RevokeAdministratorRights,
+)
+from maxo.bot.methods.chats.send_chat_action import SendChatAction
+from maxo.bot.methods.messages.callback_answer import CallbackAnswer
+from maxo.bot.methods.messages.delete_message import DeleteMessage
+from maxo.bot.methods.messages.edit_message import EditMessage
+from maxo.bot.methods.messages.get_message import GetMessage
+from maxo.bot.methods.messages.get_messages import GetMessages
+from maxo.bot.methods.messages.get_video_info import GetVideoInfo
+from maxo.bot.methods.messages.send_message import SendMessage
+from maxo.bot.methods.subscriptions.get_updates import GetUpdates
+from maxo.bot.methods.upload.get_download_link import GetDownloadLink
+from maxo.bot.methods.upload.upload_media import UploadMedia
 from maxo.bot.state import (
     BotState,
     ClosedBotState,
     EmptyBotState,
     InitialBotState,
 )
-from maxo.methods.bots.edit_me import EditMe
-from maxo.methods.bots.get_me import GetMe
-from maxo.methods.chats.add_chat_members import AddChatMembers
-from maxo.methods.chats.delete_chat import DeleteChat
-from maxo.methods.chats.delete_chat_member import DeleteChatMember
-from maxo.methods.chats.delete_pin_message import DeletePinMessage
-from maxo.methods.chats.edit_chat import EditChat
-from maxo.methods.chats.get_chat import GetChat
-from maxo.methods.chats.get_chat_by_link import GetChatByLink
-from maxo.methods.chats.get_chat_members import GetChatMembers
-from maxo.methods.chats.get_chats import GetChats
-from maxo.methods.chats.get_message_pin import GetMessagePin
-from maxo.methods.chats.pin_message import PinMessage
-from maxo.methods.chats.remove_me_chat import RemoveMeChat
-from maxo.methods.chats.revoke_administrator_rights import (
-    RevokeAdministratorRights,
-)
-from maxo.methods.chats.send_chat_action import SendChatAction
-from maxo.methods.messages.callback_answer import CallbackAnswer
-from maxo.methods.messages.delete_message import DeleteMessage
-from maxo.methods.messages.edit_message import EditMessage
-from maxo.methods.messages.get_message import GetMessage
-from maxo.methods.messages.get_messages import GetMessages
-from maxo.methods.messages.get_video_info import GetVideoInfo
-from maxo.methods.messages.send_message import SendMessage
-from maxo.methods.subscriptions.get_updates import GetUpdates
-from maxo.methods.upload.get_download_link import GetDownloadLink
-from maxo.methods.upload.upload_media import UploadMedia
 
 T = TypeVar("T")
 

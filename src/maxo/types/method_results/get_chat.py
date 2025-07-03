@@ -1,8 +1,6 @@
 from maxo.omit import Omittable, Omitted
 from maxo.types.base import MaxoType
-from maxo.types.chat import Chat
-
-__all__ = ["GetChatResult"]
+from maxo.types.types.chat import Chat
 
 
 class GetChatResult(MaxoType):

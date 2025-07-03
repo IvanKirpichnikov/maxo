@@ -3,8 +3,6 @@ from typing import Any
 
 from typing_extensions import dataclass_transform
 
-__all__ = ["MaxoType"]
-
 
 @dataclass_transform(
     eq_default=False,

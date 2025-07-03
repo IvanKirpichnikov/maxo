@@ -15,11 +15,7 @@ from retejo.markers import (
 )
 
 from maxo._adaptix.has_tag_provider import has_tag_provider
-from maxo.bot._warming_up import warming_up_retort
-from maxo.enums.attachment_request_type import AttachmentRequestType
-from maxo.enums.attachment_type import AttachmentType
-from maxo.enums.keyboard_button_type import KeyboardButtonType
-from maxo.enums.markup_element_type import MarkupElementType
+from maxo.bot.warming_up import warming_up_retort
 from maxo.errors.api import (
     MaxBotBadRequestError,
     MaxBotMethodNotAllowedError,
@@ -29,7 +25,11 @@ from maxo.errors.api import (
     MaxBotUnauthorizedError,
     MaxVotForbiddenError,
 )
-from maxo.types.attachments.attachments import (
+from maxo.types.enums.attachment_request_type import AttachmentRequestType
+from maxo.types.enums.attachment_type import AttachmentType
+from maxo.types.enums.keyboard_button_type import KeyboardButtonType
+from maxo.types.enums.markup_element_type import MarkupElementType
+from maxo.types.types.attachments import (
     AudioAttachment,
     ContactAttachment,
     FileAttachment,
@@ -40,14 +40,14 @@ from maxo.types.attachments.attachments import (
     StickerAttachment,
     VideoAttachment,
 )
-from maxo.types.keyboard_buttons import (
+from maxo.types.types.keyboard_buttons import (
     CallbackKeyboardButton,
     ChatKeyboardButton,
     LinkKeyboardButton,
     RequestContactKeyboardButton,
     RequestGeoLocationKeyboardButton,
 )
-from maxo.types.markup_elements import (
+from maxo.types.types.markup_elements import (
     EmphasizedMarkupElement,
     HeadingMarkupElement,
     HighlightedMarkupElement,
@@ -58,7 +58,7 @@ from maxo.types.markup_elements import (
     UnderlineMarkupElement,
     UserMentionMarkupElement,
 )
-from maxo.types.request_attachments.attachments import (
+from maxo.types.types.request_attachments import (
     AudioAttachmentRequest,
     ContactAttachmentRequest,
     FileAttachmentRequest,

@@ -2,7 +2,7 @@ import logging
 import os
 
 from maxo import Bot, Dispatcher
-from maxo.facades import MessageCreatedFacade
+from maxo.alta.facades import MessageCreatedFacade
 from maxo.types import MessageCreated
 
 bot = Bot(os.environ["TOKEN"])

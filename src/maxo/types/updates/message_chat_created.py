@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from maxo.types.chat import Chat
+from maxo.types.types.chat import Chat
 from maxo.types.updates.base import BaseUpdate
 
 

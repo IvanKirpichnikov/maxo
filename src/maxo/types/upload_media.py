@@ -6,7 +6,7 @@ from typing import Protocol, runtime_checkable
 
 from anyio import open_file
 
-from maxo.enums.upload_type import UploadType
+from maxo.types.enums.upload_type import UploadType
 
 
 @runtime_checkable

@@ -4,10 +4,10 @@ from maxo.errors.types.message_callback import (
     MessageCallbackMessageIsEmptyError,
 )
 from maxo.omit import Omittable, Omitted
-from maxo.types.callback import Callback
-from maxo.types.message.message import Message
+from maxo.types.types.callback import Callback
+from maxo.types.types.message import Message
+from maxo.types.types.user import User
 from maxo.types.updates.base import BaseUpdate
-from maxo.types.user.user import User
 
 
 class MessageCallback(BaseUpdate):

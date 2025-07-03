@@ -1,7 +1,7 @@
 from datetime import datetime
 
+from maxo.types.types.user import User
 from maxo.types.updates.base import BaseUpdate
-from maxo.types.user.user import User
 
 
 class DialogCleared(BaseUpdate):

@@ -1,7 +1,7 @@
 from collections.abc import Sequence
 
 from maxo.types.base import MaxoType
-from maxo.types.message.message import Message
+from maxo.types.types.message import Message
 
 
 class GetMessagesResult(MaxoType):
