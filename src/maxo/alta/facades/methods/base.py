@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from maxo.bot.bot import Bot
+from maxo.kerno.bot.bot import Bot
 
 
 class BaseMethodsFacade(ABC):

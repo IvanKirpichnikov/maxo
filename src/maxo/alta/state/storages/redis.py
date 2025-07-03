@@ -45,7 +45,7 @@ class RedisStorage(Storage):
                 ex=self.state_ttl,
             )
 
-    async def get_state(
+    async def get_raw_data(
         self,
         key: StorageKey,
     ) -> str | None:

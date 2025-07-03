@@ -5,9 +5,8 @@ from typing import overload
 
 from typing_extensions import Self
 
-from maxo.omit import Omittable, Omitted
-from maxo.types.types.keyboard_buttons import KeyboardButtons
-from maxo.types.types.request_attachments import (
+from maxo.kerno.types.types.keyboard_buttons import KeyboardButtons
+from maxo.kerno.types.types.request_attachments import (
     AttachmentsRequests,
     AudioAttachmentRequest,
     ContactAttachmentRequest,
@@ -19,6 +18,7 @@ from maxo.types.types.request_attachments import (
     StickerAttachmentRequest,
     VideoAttachmentRequest,
 )
+from maxo.omit import Omittable, Omitted
 
 
 class AttachmentRequestBuilder:

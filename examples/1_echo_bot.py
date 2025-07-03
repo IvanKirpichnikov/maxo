@@ -3,7 +3,7 @@ import os
 
 from maxo import Bot, Dispatcher
 from maxo.alta.facades import MessageCreatedFacade
-from maxo.types import MessageCreated
+from maxo.kerno.types import MessageCreated
 
 bot = Bot(os.environ["TOKEN"])
 dispatcher = Dispatcher()

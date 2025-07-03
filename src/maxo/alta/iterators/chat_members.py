@@ -4,9 +4,9 @@ from typing import cast, overload
 
 from typing_extensions import Self
 
-from maxo.bot.bot import Bot
+from maxo.kerno.bot.bot import Bot
+from maxo.kerno.types.types.chat_member import ChatMember
 from maxo.omit import Omittable, Omitted
-from maxo.types.types.chat_member import ChatMember
 
 
 class ChatMembersIterator(AsyncIterator[ChatMember]):

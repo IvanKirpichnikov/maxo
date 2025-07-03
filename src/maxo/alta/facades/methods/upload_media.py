@@ -2,9 +2,9 @@ from retejo.errors import ClientLibraryError
 from retejo.file_obj import FileObj
 from retejo.markers import is_defined
 
-from maxo.bot.bot import Bot
-from maxo.types.method_results.upload_media import UploadMediaResult
-from maxo.types.upload_media import UploadMedia
+from maxo.kerno.bot.bot import Bot
+from maxo.kerno.types.method_results.upload_media import UploadMediaResult
+from maxo.kerno.types.upload_media import UploadMedia
 
 
 class UploadMediaFacade:

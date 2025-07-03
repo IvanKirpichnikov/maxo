@@ -6,8 +6,8 @@ from magic_filter import F
 from maxo import Bot, Dispatcher, Router
 from maxo.alta.builders import KeyboardBuilder
 from maxo.alta.facades import MessageCallbackFacade, MessageCreatedFacade
-from maxo.routing.filters import CommandStart, MagicFilter
-from maxo.types import MessageCallback, MessageCreated
+from maxo.kerno.routing import CommandStart, MagicFilter
+from maxo.kerno.types import MessageCallback, MessageCreated
 
 router = Router(__name__)
 

@@ -17,7 +17,7 @@ class Storage(Protocol):
         raise NotImplementedError
 
     @abstractmethod
-    async def get_state(self, key: StorageKey) -> str | None:
+    async def get_raw_data(self, key: StorageKey) -> str | None:
         raise NotImplementedError
 
     @abstractmethod

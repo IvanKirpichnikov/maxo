@@ -7,24 +7,24 @@ from typing_extensions import assert_never
 
 from maxo.alta.facades.methods.base import BaseMethodsFacade
 from maxo.alta.facades.methods.upload_media import UploadMediaFacade
-from maxo.omit import Omittable, Omitted
-from maxo.types.enums.chat_type import ChatType
-from maxo.types.enums.message_link_type import MessageLinkType
-from maxo.types.enums.text_fromat import TextFormat
-from maxo.types.enums.upload_type import UploadType
-from maxo.types.method_results.method import MethodResult
-from maxo.types.types.keyboard_buttons import Keyboard
-from maxo.types.types.message import Message
-from maxo.types.types.new_message_link import NewMessageLink
-from maxo.types.types.payload_request_attachments import (
+from maxo.kerno.types.enums.chat_type import ChatType
+from maxo.kerno.types.enums.message_link_type import MessageLinkType
+from maxo.kerno.types.enums.text_fromat import TextFormat
+from maxo.kerno.types.enums.upload_type import UploadType
+from maxo.kerno.types.method_results.method import MethodResult
+from maxo.kerno.types.types.keyboard_buttons import Keyboard
+from maxo.kerno.types.types.message import Message
+from maxo.kerno.types.types.new_message_link import NewMessageLink
+from maxo.kerno.types.types.payload_request_attachments import (
     InlineKeyboardAttachmentRequestPayload,
 )
-from maxo.types.types.request_attachments import (
+from maxo.kerno.types.types.request_attachments import (
     AttachmentsRequests,
     InlineKeyboardAttachmentRequest,
     MediaAttachmentsRequests,
 )
-from maxo.types.upload_media import UploadMedia
+from maxo.kerno.types.upload_media import UploadMedia
+from maxo.omit import Omittable, Omitted
 
 
 class MessageMethodsFacade(BaseMethodsFacade, ABC):

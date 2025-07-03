@@ -32,7 +32,7 @@ class MemoryStorage(Storage):
         else:
             self._state[built_key] = state.state
 
-    async def get_state(self, key: StorageKey) -> str | None:
+    async def get_raw_data(self, key: StorageKey) -> str | None:
         built_key = self._key_builder.build(key, StorageKeyType.STATE)
         return self._state.get(built_key)
 

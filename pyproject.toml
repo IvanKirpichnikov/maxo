@@ -1,27 +1,39 @@
+[build-system]
+requires = ["uv_build==0.7.19"]
+build-backend = "uv_build"
+
 [project]
 name = "maxo"
 description = "Modern framework for max bots"
 version = "0.0.1"
 requires-python = ">=3.10"
 dependencies = [
-    "anyio~=4.9.0, <=5.0.0",
-    "magic_filter~=1.0.12, <= 2.0.0",
-    "typing-extensions~=4.14.0, <=5.0.0",
+    "anyio~=4.9.0",
+    "magic_filter~=1.0.12",
+    "typing-extensions~=4.14.0",
     "retejo[aiohttp, adaptix] @ git+https://github.com/IvanKirpichnikov/retejo.git@develop",
 ]
 
 [project.optional-dependencies]
-redis = ["redis>=6.0.0,<7.0.0"]
+redis = ["redis~=6.0.0"]
+
+[dependency-groups]
+optionals = ["maxo[redis]"]
 lint = [
     "mypy==1.16.0",
     "ruff==0.11.13",
 ]
-dev = ["maxo[lint, magic_filter]"]
+dev = [
+    { include-group = "optionals"},
+    { include-group = "lint" },
+]
 
 
 [tool.mypy]
 files = ["src", "examples"]
 strict = true
+strict_bytes = true
+local_partial_types = true
 sqlite_cache = false
 
 [tool.ruff]
@@ -30,7 +42,6 @@ include = [
     "examples/**.py",
     "pyproject.toml",
 ]
-fix = true
 line-length = 120
 target-version = "py310"
 

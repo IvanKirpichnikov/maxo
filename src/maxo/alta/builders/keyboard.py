@@ -10,9 +10,8 @@ from typing import ClassVar, TypeVar
 
 from typing_extensions import Self
 
-from maxo.omit import Omittable, Omitted
-from maxo.types.enums.intent import IntentType
-from maxo.types.types.keyboard_buttons import (
+from maxo.kerno.types.enums.intent import IntentType
+from maxo.kerno.types.types.keyboard_buttons import (
     CallbackKeyboardButton,
     ChatKeyboardButton,
     KeyboardButtons,
@@ -20,6 +19,7 @@ from maxo.types.types.keyboard_buttons import (
     RequestContactKeyboardButton,
     RequestGeoLocationKeyboardButton,
 )
+from maxo.omit import Omittable, Omitted
 
 T = TypeVar("T")
 

@@ -14,8 +14,8 @@ class StateManager:
     async def set_state(self, state: State | None = None) -> None:
         await self.storage.set_state(key=self.key, state=state)
 
-    async def get_state(self) -> str | None:
-        return await self.storage.get_state(key=self.key)
+    async def get_raw_data(self) -> str | None:
+        return await self.storage.get_raw_data(key=self.key)
 
     async def set_data(self, data: MutableMapping[str, Any]) -> None:
         await self.storage.set_data(key=self.key, data=data)

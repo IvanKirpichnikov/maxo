@@ -1,7 +1,7 @@
 from typing import Generic, TypeVar
 
-from maxo.bot.bot import Bot
-from maxo.types.updates.base import BaseUpdate
+from maxo.kerno.bot.bot import Bot
+from maxo.kerno.types.updates.base import BaseUpdate
 
 U = TypeVar("U", bound=BaseUpdate)
 
