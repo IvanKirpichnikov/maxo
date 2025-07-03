@@ -21,8 +21,8 @@ class StateManagerMiddleware(Middleware[Update[Any]]):
 
     async def execute(
         self,
-        ctx: Ctx[Update[Any]],
         update: Update[Any],
+        ctx: Ctx[Update[Any]],
         next: NextMiddleware[Update[Any]],
     ) -> Any:
         storage_key = self.make_storage_key(

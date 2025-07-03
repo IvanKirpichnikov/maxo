@@ -27,8 +27,11 @@ class Command(Filter[MessageCreated]):
         self.ignore_case = ignore_case
         self.ignore_mention = ignore_mention
 
-    async def execute(self, ctx: Ctx[MessageCreated]) -> bool:
-        update = ctx.update
+    async def execute(
+        self,
+        update: MessageCreated,
+        ctx: Ctx[MessageCreated],
+    ) -> bool:
         if not isinstance(update, MessageCreated):
             return False
 

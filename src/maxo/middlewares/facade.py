@@ -19,8 +19,8 @@ _FACEDS_MAP: Mapping[type[Any], type[BaseUpdateFacade[Any]]] = {
 class FacadeMiddleware(Middleware[Update[Any]]):
     async def execute(
         self,
-        ctx: Ctx[Update[Any]],
         update: Update[Any],
+        ctx: Ctx[Update[Any]],
         next: NextMiddleware[Update[Any]],
     ) -> Any:
         facade = _FACEDS_MAP.get(type(update.update))

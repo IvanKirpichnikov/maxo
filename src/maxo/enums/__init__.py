@@ -11,7 +11,6 @@ from maxo.enums.message_link_type import MessageLinkType
 from maxo.enums.text_fromat import TextFormat
 from maxo.enums.upload_type import UploadType
 
-
 __all__ = [
     "AttachmentRequestType",
     "AttachmentType",

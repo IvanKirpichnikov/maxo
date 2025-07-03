@@ -17,8 +17,8 @@ class AndFilter(Filter[U], Generic[U]):
         self._lgh = lgh
         self._rgh = rgh
 
-    async def execute(self, ctx: Ctx[U]) -> bool:
-        return await self._lgh.execute(ctx) and await self._rgh.execute(ctx)
+    async def execute(self, update: U, ctx: Ctx[U]) -> bool:
+        return await self._lgh.execute(update, ctx) and await self._rgh.execute(update, ctx)
 
 
 @final
@@ -31,8 +31,8 @@ class OrFilter(Filter[U], Generic[U]):
         self._lgh = lgh
         self._rgh = rgh
 
-    async def execute(self, ctx: Ctx[U]) -> bool:
-        return await self._lgh.execute(ctx) or await self._rgh.execute(ctx)
+    async def execute(self, update: U, ctx: Ctx[U]) -> bool:
+        return await self._lgh.execute(update, ctx) or await self._rgh.execute(update, ctx)
 
 
 @final
@@ -45,8 +45,8 @@ class XorFilter(Filter[U], Generic[U]):
         self._lgh = lgh
         self._rgh = rgh
 
-    async def execute(self, ctx: Ctx[U]) -> bool:
-        return await self._lgh.execute(ctx) != await self._rgh.execute(ctx)
+    async def execute(self, update: U, ctx: Ctx[U]) -> bool:
+        return await self._lgh.execute(update, ctx) != await self._rgh.execute(update, ctx)
 
 
 @final
@@ -57,5 +57,5 @@ class InvertFilter(Filter[U], Generic[U]):
     ) -> None:
         self._filter = filter
 
-    async def execute(self, ctx: Ctx[U]) -> bool:
-        return not await self._filter.execute(ctx)
+    async def execute(self, update: U, ctx: Ctx[U]) -> bool:
+        return not await self._filter.execute(update, ctx)

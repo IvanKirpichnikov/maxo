@@ -23,8 +23,8 @@ UPDATE_CHAT_KEY: Final = "update_chat"
 class UpdateContextMiddleware(Middleware[Update[Any]]):
     async def execute(
         self,
-        ctx: Ctx[Update[Any]],
         update: Update[Any],
+        ctx: Ctx[Update[Any]],
         next: NextMiddleware[Update[Any]],
     ) -> Any:
         update_context = ctx[UPDATE_CONTEXT_KEY] = self._resolve_update_context(update.update)

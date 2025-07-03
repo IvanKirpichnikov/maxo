@@ -21,5 +21,9 @@ class ErrorFilter(Filter[ErrorEvent[E]], Generic[E]):
 
         self._handler = handler
 
-    async def execute(self, ctx: Ctx[ErrorEvent[Any]]) -> bool:
+    async def execute(
+        self,
+        update: ErrorEvent[Any],
+        ctx: Ctx[ErrorEvent[Any]],
+    ) -> bool:
         return self._handler(ctx.update.error)

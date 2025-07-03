@@ -17,8 +17,8 @@ class Middleware(Protocol[U]):
     @abstractmethod
     async def execute(
         self,
-        ctx: Ctx[U],
         update: U,
+        ctx: Ctx[U],
         next: NextMiddleware[U],
     ) -> Any:
         raise NotImplementedError

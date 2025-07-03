@@ -1,13 +1,11 @@
+import logging
 import os
 
-from maxo.bot import Bot
-from maxo.dispatcher import Dispatcher
+from maxo import Bot, Dispatcher
 from maxo.facades import MessageCreatedFacade
 from maxo.types import MessageCreated
 
-TOKEN = os.environ["TOKEN"]
-
-bot = Bot(TOKEN)
+bot = Bot(os.environ["TOKEN"])
 dispatcher = Dispatcher()
 
 
@@ -20,4 +18,5 @@ async def echo_handler(
     await facade.answer_text(text or "Текста нет")
 
 
+logging.basicConfig(level=logging.INFO)
 dispatcher.run_polling(bot)

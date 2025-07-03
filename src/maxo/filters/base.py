@@ -10,7 +10,11 @@ U = TypeVar("U", bound=BaseUpdate)
 @runtime_checkable
 class Filter(Protocol[U]):
     @abstractmethod
-    async def execute(self, ctx: Ctx[U]) -> bool:
+    async def execute(
+        self,
+        update: U,
+        ctx: Ctx[U],
+    ) -> bool:
         raise NotImplementedError
 
     def __and__(self, other: "Filter[U] | Any") -> "Filter[U]":

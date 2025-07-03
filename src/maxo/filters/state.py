@@ -13,7 +13,7 @@ class StateFilter(Filter[Any]):
     ) -> None:
         self._states = states
 
-    async def execute(self, ctx: Ctx[Any]) -> bool:
+    async def execute(self, update: Any, ctx: Ctx[Any]) -> bool:
         raw_state = ctx.raw_state
 
         for state in self._states:

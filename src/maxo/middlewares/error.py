@@ -13,8 +13,8 @@ class ErrorMiddleware(Middleware[Any]):
 
     async def execute(
         self,
-        ctx: Ctx[Any],
         update: Any,
+        ctx: Ctx[Any],
         next: NextMiddleware[Any],
     ) -> Any:
         try:

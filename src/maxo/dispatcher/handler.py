@@ -72,7 +72,7 @@ class Handler(Generic[U, P, T]):
         if self._filter is None:
             return True
 
-        return await self._filter.execute(ctx)
+        return await self._filter.execute(ctx.update, ctx)
 
     async def execute(self, ctx: Ctx[U]) -> T:
         kwargs = self._data_getter(ctx.data)

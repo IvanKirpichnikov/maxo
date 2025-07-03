@@ -3,13 +3,12 @@ import os
 
 from magic_filter import F
 
-from maxo.bot import Bot
+from maxo import Bot, Dispatcher, Router
 from maxo.builders import KeyboardBuilder
-from maxo.dispatcher import Dispatcher, Router
 from maxo.facades import MessageCallbackFacade, MessageCreatedFacade
 from maxo.filters.command import CommandStart
 from maxo.filters.magic_filter import MagicFilter
-from maxo.types import MessageCreated, MessageCallback
+from maxo.types import MessageCallback, MessageCreated
 
 router = Router(__name__)
 
@@ -50,9 +49,7 @@ async def click_me_handler(
 
 
 def main() -> None:
-    TOKEN = os.environ["TOKEN"]
-
-    bot = Bot(TOKEN)
+    bot = Bot(os.environ["TOKEN"])
     dispatcher = Dispatcher()
     dispatcher.include(router)
 

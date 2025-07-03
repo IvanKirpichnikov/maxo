@@ -3,6 +3,6 @@ from .state import State, StatesGroup
 
 __all__ = [
     "State",
-    "StatesGroup",
     "StateManager",
+    "StatesGroup",
 ]
