@@ -1,0 +1,99 @@
+[project]
+name = "maxo"
+description = "Modern framework for max bots"
+version = "0.0.1"
+requires-python = ">=3.10"
+dependencies = [
+    "anyio==4.9.0",
+    "magic_filter~=1.0.12",
+    "typing-extensions==4.14.0",
+    "retejo[aiohttp, adaptix] @ git+https://github.com/IvanKirpichnikov/retejo.git@develop",
+]
+
+[project.optional-dependencies]
+redis = ["redis>=6.0.0,<7.0.0"]
+lint = [
+    "mypy==1.16.0",
+    "ruff==0.11.13",
+]
+dev = ["maxo[lint, magic_filter]"]
+
+
+[tool.mypy]
+files = ["src", "examples"]
+strict = true
+sqlite_cache = false
+
+[tool.ruff]
+include = [
+    "src/maxo/**/*.py",
+    "examples/**.py",
+    "pyproject.toml",
+]
+fix = true
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",     # pycodestyle errors     https://docs.astral.sh/ruff/rules/#error-e
+    "W",     # pycodestyle warnings   https://docs.astral.sh/ruff/rules/#warning-w
+    "C90",   # mccabe                 https://docs.astral.sh/ruff/rules/#mccabe-c90
+    "N",     # pep8-naming            https://docs.astral.sh/ruff/rules/#pep8-naming-n
+    "D",     # pydocstyle             https://docs.astral.sh/ruff/rules/#pydocstyle-d
+    "I",     # isort                  https://docs.astral.sh/ruff/rules/#isort-i
+    "F",     # pyflakes               https://docs.astral.sh/ruff/rules/#pyflakes-f
+    "ASYNC", # flake8-async           https://docs.astral.sh/ruff/rules/#flake8-async-async
+    "C4",    # flake8-comprehensions  https://docs.astral.sh/ruff/rules/#flake8-comprehensions-c4
+    "B",     # flake8-bugbear         https://docs.astral.sh/ruff/rules/#flake8-bugbear-b
+    "Q",     # flake8-quotes          https://docs.astral.sh/ruff/rules/#flake8-quotes-q
+    "T20",   # flake8-print           https://docs.astral.sh/ruff/rules/#flake8-print-t20
+    "SIM",   # flake8-simplify        https://docs.astral.sh/ruff/rules/#flake8-simplify-sim
+    "PT",    # flake8-pytest-style    https://docs.astral.sh/ruff/rules/#flake8-pytest-style-pt
+    "PTH",   # flake8-use-pathlib     https://docs.astral.sh/ruff/rules/#flake8-use-pathlib-pth
+    "TCH",   # flake8-type-checking   https://docs.astral.sh/ruff/rules/#flake8-type-checking-tch
+    "RUF",   # Ruff-specific rules    https://docs.astral.sh/ruff/rules/#ruff-specific-rules-ruf
+    "PERF",  # Perflint               https://docs.astral.sh/ruff/rules/#perflint-perf
+    "UP",    # pyupgrade              https://docs.astral.sh/ruff/rules/#pyupgrade-up
+]
+
+ignore = [
+    "RUF009", # Do not call in dataclass defaults
+
+    "B008",  # Do not call in dataclass defaults
+
+    "ASYNC109", # own timeout implementation
+
+    "E501",     # line too long, handled by formatter later
+    "C901",     # too complex
+
+    # todo pep8-naming
+    "N817",     # CamelCase `*` imported as acronym `*`
+    "N815",     # Variable `*` in class scope should not be mixedCase
+    "N803",     # Argument name `expandMessageExamples` should be lowercase
+
+    # todo pydocstyle
+    "D100",     # missing docstring in public module
+    "D101",
+    "D102",
+    "D103",
+    "D104",     # missing docstring in public package
+    "D105",     # missing docstring in magic methods
+    "D106",     # missing docstring in public nested class
+    "D107",     # missing docstring in __init__
+    "D212",
+    "D203",
+
+    "TC001",
+    "UP"
+]
+
+[tool.ruff.lint.isort]
+case-sensitive = true
+combine-as-imports = true
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "lf"
