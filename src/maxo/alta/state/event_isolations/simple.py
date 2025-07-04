@@ -8,6 +8,8 @@ from maxo.alta.state.key_builder import DefaultKeyBuilder, KeyBuilder, StorageKe
 
 
 class SimpleEventIsolation(EventIsolation):
+    __slots__ = ("_key_builder", "_locks")
+
     def __init__(
         self,
         key_builder: KeyBuilder | None = None,

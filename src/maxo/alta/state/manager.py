@@ -7,6 +7,8 @@ from maxo.alta.state.storages.base import Storage
 
 
 class StateManager:
+    __slots__ = ("key", "storage")
+
     def __init__(self, storage: Storage, key: StorageKey) -> None:
         self.key = key
         self.storage = storage

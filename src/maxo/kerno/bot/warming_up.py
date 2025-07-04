@@ -215,8 +215,9 @@ def warming_up_retort(
     if not warming_up:
         return retort
 
-    for type in types:
-        retort.get_loader(type)
-        retort.get_dumper(type)
+    local_types = types
+    for type_ in local_types:
+        retort.get_loader(type_)
+        retort.get_dumper(type_)
 
     return retort

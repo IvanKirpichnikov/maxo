@@ -9,6 +9,8 @@ U = TypeVar("U", bound=BaseUpdate)
 
 @final
 class AndFilter(Filter[U], Generic[U]):
+    __slots__ = ("_lgh", "_rgh")
+
     def __init__(
         self,
         lgh: Filter[U],
@@ -23,6 +25,8 @@ class AndFilter(Filter[U], Generic[U]):
 
 @final
 class OrFilter(Filter[U], Generic[U]):
+    __slots__ = ("_lgh", "_rgh")
+
     def __init__(
         self,
         lgh: Filter[U],
@@ -37,6 +41,8 @@ class OrFilter(Filter[U], Generic[U]):
 
 @final
 class XorFilter(Filter[U], Generic[U]):
+    __slots__ = ("_lgh", "_rgh")
+
     def __init__(
         self,
         lgh: Filter[U],
@@ -51,6 +57,8 @@ class XorFilter(Filter[U], Generic[U]):
 
 @final
 class InvertFilter(Filter[U], Generic[U]):
+    __slots__ = ("_filter",)
+
     def __init__(
         self,
         filter: Filter[U],

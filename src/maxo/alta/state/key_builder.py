@@ -21,6 +21,8 @@ class StorageKeyType(str, Enum):
 
 
 class KeyBuilder(Protocol):
+    __slots__ = ()
+
     @abstractmethod
     def build(
         self,
@@ -31,6 +33,13 @@ class KeyBuilder(Protocol):
 
 
 class DefaultKeyBuilder(KeyBuilder):
+    __slots__ = (
+        "prefix",
+        "separator",
+        "with_bot_id",
+        "with_destiny",
+    )
+
     def __init__(
         self,
         *,

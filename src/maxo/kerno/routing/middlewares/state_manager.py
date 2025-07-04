@@ -11,6 +11,11 @@ from maxo.kerno.types.updates.update import Update
 
 
 class StateManagerMiddleware(Middleware[Update[Any]]):
+    __slots__ = (
+        "_event_isolation",
+        "_storage",
+    )
+
     def __init__(
         self,
         storage: Storage,

@@ -9,6 +9,8 @@ U = TypeVar("U", bound=BaseUpdate)
 
 @runtime_checkable
 class Filter(Protocol[U]):
+    __slots__ = ()
+
     @abstractmethod
     async def execute(
         self,

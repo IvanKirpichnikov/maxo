@@ -22,6 +22,8 @@ from maxo.omit import Omittable, Omitted
 
 
 class AttachmentRequestBuilder:
+    __slots__ = ("_items",)
+
     def __init__(self) -> None:
         self._items: list[AttachmentsRequests] = []
 

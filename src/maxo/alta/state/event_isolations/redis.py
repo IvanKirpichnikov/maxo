@@ -12,6 +12,12 @@ DEFAULT_REDIS_LOCK_KWARGS = {"timeout": 60}
 
 
 class RedisEventIsolation(EventIsolation):
+    __slots__ = (
+        "key_builder",
+        "lock_kwargs",
+        "redis",
+    )
+
     def __init__(
         self,
         redis: Redis,

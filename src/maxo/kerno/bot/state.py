@@ -7,6 +7,8 @@ from maxo.kerno.types.types.me import Me
 
 
 class BotState(Protocol):
+    __slots__ = ()
+
     @property
     @abstractmethod
     def api_client(self) -> MaxApiClient:
@@ -65,6 +67,8 @@ class ClosedBotState(BotState):
 
 
 class InitialBotState(BotState):
+    __slots__ = ("_api_client", "_me")
+
     def __init__(
         self,
         me: Me,

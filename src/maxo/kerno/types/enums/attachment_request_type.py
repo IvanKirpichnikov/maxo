@@ -7,7 +7,7 @@ class AttachmentRequestType(str, Enum):
     AUDIO = "audio"
     FILE = "file"
     STICKER = "sticker"
-    CONTECT = "contact"
+    CONTACT = "contact"
     INLINE_KEYBOARD = "inline_keyboard"
     LOCATION = "location"
     SHARE = "share"

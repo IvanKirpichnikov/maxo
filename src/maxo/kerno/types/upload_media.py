@@ -11,6 +11,8 @@ from maxo.kerno.types.enums.upload_type import UploadType
 
 @runtime_checkable
 class UploadMedia(Protocol):
+    __slots__ = ()
+
     @property
     @abstractmethod
     def file_name(self) -> str:
@@ -27,6 +29,12 @@ class UploadMedia(Protocol):
 
 
 class BufferedUploadMedia(UploadMedia):
+    __slots__ = (
+        "_data",
+        "_file_name",
+        "_type",
+    )
+
     def __init__(
         self,
         data: bytes,
@@ -62,11 +70,16 @@ class BufferedUploadMedia(UploadMedia):
         return self._file_name
 
     async def read(self) -> bytes:
-        buffer = io.BytesIO(self._data)
-        return buffer.read()
+        return io.BytesIO(self._data).read()
 
 
 class FSUploadMedia(UploadMedia):
+    __slots__ = (
+        "_file_name",
+        "_path",
+        "_type",
+    )
+
     def __init__(
         self,
         path: str | Path,

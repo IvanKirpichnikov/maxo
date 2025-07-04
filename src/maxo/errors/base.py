@@ -11,7 +11,6 @@ T = TypeVar("T")
 )
 def error(cls: type[T]) -> type[T]:
     return dataclass(
-        slots=True,
         frozen=True,
     )(cls)
 

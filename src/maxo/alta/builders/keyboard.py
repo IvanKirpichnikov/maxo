@@ -71,6 +71,8 @@ class KeyboardValidator:
 class KeyboardBuilder:
     _keyboard: MutableSequence[MutableSequence[KeyboardButtons]]
 
+    __slots__ = ("_keyboard", "_validator")
+
     def __init__(
         self,
         keyboard: MutableSequence[MutableSequence[KeyboardButtons]] | None = None,

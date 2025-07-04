@@ -8,6 +8,8 @@ from maxo.kerno.types.updates.error import ErrorEvent
 
 
 class ErrorMiddleware(Middleware[Any]):
+    __slots__ = ("_router",)
+
     def __init__(self, router: Router) -> None:
         self._router = router
 

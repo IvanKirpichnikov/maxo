@@ -6,6 +6,8 @@ class State:
     _name: str | None
     _group: "type[StatesGroup] | None"
 
+    __slots__ = ("_group", "_name")
+
     def __init__(self, name: str | None = None) -> None:
         self._name = name
         self._group = None
@@ -88,7 +90,7 @@ class StatesGroupMetaClass(type):
 
 
 class StatesGroup(metaclass=StatesGroupMetaClass):
-    pass
+    __slots__ = ("__raw_states__", "__states__")
 
 
 any_state: Final = State("*")

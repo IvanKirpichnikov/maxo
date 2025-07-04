@@ -82,7 +82,7 @@ from maxo.kerno.types.updates.message_removed import MessageRemoved
 from maxo.kerno.types.updates.user_added import UserAdded
 from maxo.kerno.types.updates.user_removed import UserRemoved
 
-_has_tag_providers = [
+_has_tag_providers = (
     # ---> UpdateType <---
     has_tag_provider(BotAdded, "update_type", "bot_added"),
     has_tag_provider(UserAdded, "update_type", "user_added"),
@@ -122,7 +122,7 @@ _has_tag_providers = [
     has_tag_provider(AudioAttachmentRequest, "type", AttachmentRequestType.AUDIO),
     has_tag_provider(FileAttachmentRequest, "type", AttachmentRequestType.FILE),
     has_tag_provider(StickerAttachmentRequest, "type", AttachmentRequestType.STICKER),
-    has_tag_provider(ContactAttachmentRequest, "type", AttachmentRequestType.CONTECT),
+    has_tag_provider(ContactAttachmentRequest, "type", AttachmentRequestType.CONTACT),
     has_tag_provider(
         InlineKeyboardAttachmentRequest,
         "type",
@@ -144,7 +144,7 @@ _has_tag_providers = [
         "type",
         KeyboardButtonType.REQUEST_GEO_LOCATION,
     ),
-]
+)
 
 
 class MaxApiClient(AiohttpAdaptixClient):
@@ -161,12 +161,12 @@ class MaxApiClient(AiohttpAdaptixClient):
 
     def init_markers_factories(self) -> MarkersFactorties[Retort]:
         # markers_factories = super().init_markers_factories()
-        base_recipe = [
+        base_recipe = (
             *_has_tag_providers,
             as_sentinel(Omitted),
             OmitOmittedFieldProvider(),
             dumper(P[datetime], lambda x: x.timestamp() * 1000),
-        ]
+        )
         markers_factories: MarkersFactorties[Retort] = {}
 
         common_retort = warming_up_retort(Retort(recipe=base_recipe), self._warming_up)
@@ -181,12 +181,12 @@ class MaxApiClient(AiohttpAdaptixClient):
         # retort = super().init_response_factory()
         return warming_up_retort(
             Retort(
-                recipe=[
+                recipe=(
                     *_has_tag_providers,
                     loader(P[datetime], lambda x: datetime.fromtimestamp(x / 1000)),
                     as_sentinel(Omitted),
                     OmitOmittedFieldProvider(),
-                ],
+                ),
             ),
             self._warming_up,
         )

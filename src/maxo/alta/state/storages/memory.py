@@ -13,6 +13,8 @@ class MemoryStorage(Storage):
     _state: MutableMapping[str, str | None]
     _data: MutableMapping[str, MutableMapping[str, Any]]
 
+    __slots__ = ("_data", "_key_builder", "_state")
+
     def __init__(
         self,
         key_builder: KeyBuilder | None = None,

@@ -8,12 +8,16 @@ U = TypeVar("U", bound=BaseUpdate)
 
 
 class NextMiddleware(Protocol[U]):
+    __slots__ = ()
+
     @abstractmethod
     async def __call__(self, ctx: Ctx[U]) -> Any:
         raise NotImplementedError
 
 
 class Middleware(Protocol[U]):
+    __slots__ = ()
+
     @abstractmethod
     async def execute(
         self,

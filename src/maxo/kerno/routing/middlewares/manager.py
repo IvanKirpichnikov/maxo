@@ -32,6 +32,8 @@ def partial_middleware(middleware: Middleware[U], next: NextMiddleware[U]) -> Ne
 class MiddlewareManager(Generic[U]):
     middlewares: MutableSequence[Middleware[U]]
 
+    __slots__ = ("middlewares",)
+
     def __init__(self) -> None:
         self.middlewares = []
 

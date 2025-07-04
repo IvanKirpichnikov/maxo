@@ -34,6 +34,12 @@ class Dispatcher(Router):
 
     _lock: Lock
 
+    __slots__ = (
+        "_lock",
+        "update",
+        "workflow_data",
+    )
+
     def __init__(
         self,
         storage: Storage | None = None,
@@ -90,7 +96,7 @@ class Dispatcher(Router):
             result = await self.trigger(ctx)
         except Exception:
             duration = (loop.time() - start_time) * 1000
-            loggers.dispathing.exception(
+            loggers.dispatching.exception(
                 "%s update failed. Update type=%r marker=%r. Duration %d ms",
                 "Handled" if result is not UNHANDLED else "Not handled",
                 update.update.__class__.__name__,
@@ -99,7 +105,7 @@ class Dispatcher(Router):
             )
         else:
             duration = (loop.time() - start_time) * 1000
-            loggers.dispathing.info(
+            loggers.dispatching.info(
                 "%s update completed %r. Update type=%r marker=%r. Duration %d ms",
                 "Handled" if result is not UNHANDLED else "Not handled",
                 result,
@@ -127,7 +133,7 @@ class Dispatcher(Router):
             types=walking_router_graph(self),
         )
         async with self._lock, bot:
-            loggers.dispathing.info("Polling started")
+            loggers.dispatching.info("Polling started")
             await self.trigger(Ctx(Startup(), copy(self.workflow_data)))
 
             with contextlib.suppress(KeyboardInterrupt):
@@ -135,7 +141,7 @@ class Dispatcher(Router):
                     async for update in updates_poller:
                         tg.start_soon(self.feed_update, update)
 
-            loggers.dispathing.info("Polling stopped")
+            loggers.dispatching.info("Polling stopped")
             await self.trigger(Ctx(Shutdown(), copy(self.workflow_data)))
 
     def run_polling(

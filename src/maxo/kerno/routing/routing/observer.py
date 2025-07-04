@@ -19,6 +19,12 @@ class UpdateObserver(Generic[U]):
 
     handlers: MutableSequence[Handler[U, Any, Any]]
 
+    __slots__ = (
+        "handlers",
+        "inner_middleware",
+        "outer_middleware",
+    )
+
     def __init__(self) -> None:
         self.handlers = []
 

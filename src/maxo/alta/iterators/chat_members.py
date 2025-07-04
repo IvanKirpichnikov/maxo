@@ -13,6 +13,15 @@ class ChatMembersIterator(AsyncIterator[ChatMember]):
     _marker: Omittable[int | None]
     _chat_members: deque[ChatMember]
 
+    __slots__ = (
+        "_bot",
+        "_chat_id",
+        "_chat_members",
+        "_count",
+        "_marker",
+        "_user_ids",
+    )
+
     @overload
     def __init__(
         self,

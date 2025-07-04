@@ -49,6 +49,12 @@ def _data_getter_by_signature(
 class Handler(Generic[U, P, T]):
     _data_getter: _DataGetter
 
+    __slots__ = (
+        "_data_getter",
+        "_filter",
+        "_handler_fn",
+    )
+
     def __init__(
         self,
         handler_fn: HandlerFn[U, P, T],

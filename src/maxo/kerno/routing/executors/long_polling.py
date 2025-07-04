@@ -11,6 +11,15 @@ from maxo.omit import Omittable
 
 
 class LongPolling(AsyncIterator[Update[Any]]):
+    __slots__ = (
+        "_bot",
+        "_limit",
+        "_marker",
+        "_timeout",
+        "_types",
+        "_updates",
+    )
+
     def __init__(
         self,
         bot: Bot,

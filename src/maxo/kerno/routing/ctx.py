@@ -16,6 +16,11 @@ U = TypeVar("U", bound=BaseUpdate)
 
 
 class Ctx(Generic[U]):
+    __slots__ = (
+        "_data",
+        "_update",
+    )
+
     def __init__(
         self,
         update: U,

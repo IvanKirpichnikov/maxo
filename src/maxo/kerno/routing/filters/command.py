@@ -9,6 +9,13 @@ class CommandParseError(Exception):
 
 
 class Command(Filter[MessageCreated]):
+    __slots__ = (
+        "commands",
+        "ignore_case",
+        "ignore_mention",
+        "prefixes",
+    )
+
     def __init__(
         self,
         *values: str,

@@ -19,7 +19,6 @@ from maxo.kerno.types.updates.message_edited import MessageEdited
 from maxo.kerno.types.updates.message_removed import MessageRemoved
 from maxo.kerno.types.updates.shutdown import Shutdown
 from maxo.kerno.types.updates.startup import Startup
-from maxo.kerno.types.updates.update import Update
 from maxo.kerno.types.updates.user_added import UserAdded
 from maxo.kerno.types.updates.user_removed import UserRemoved
 
@@ -29,7 +28,6 @@ U = TypeVar("U", bound=BaseUpdate, covariant=True)
 class RouterProtocol(Protocol):
     observers: MutableMapping[type[Any], UpdateObserver[Any]]
 
-    update: UpdateObserver[Update[Any]]
     bot_added: UpdateObserver[BotAdded]
     bot_removed: UpdateObserver[BotRemoved]
     bot_started: UpdateObserver[BotStarted]
@@ -45,6 +43,8 @@ class RouterProtocol(Protocol):
     startup: UpdateObserver[Startup]
     shutdown: UpdateObserver[Shutdown]
     error: UpdateObserver[ErrorEvent[Any]]
+
+    __slots__ = ()
 
     @property
     @abstractmethod
@@ -75,9 +75,30 @@ class RouterProtocol(Protocol):
 
 
 class Router(RouterProtocol):
+    __slots__ = (
+        "_children_routers",
+        "_name",
+        "_parent_router",
+        "bot_added",
+        "bot_removed",
+        "bot_started",
+        "chat_title_changed",
+        "dialog_cleared",
+        "error",
+        "message_callback",
+        "message_chat_created",
+        "message_created",
+        "message_edited",
+        "message_removed",
+        "observers",
+        "shutdown",
+        "startup",
+        "user_added",
+        "user_removed",
+    )
+
     def __init__(self, name: str) -> None:
         self.observers = {
-            Update: UpdateObserver(),
             BotAdded: UpdateObserver(),
             BotRemoved: UpdateObserver(),
             BotStarted: UpdateObserver(),
@@ -95,7 +116,6 @@ class Router(RouterProtocol):
             DialogCleared: UpdateObserver(),
         }
 
-        self.update = self.observers[Update]
         self.bot_added = self.observers[BotAdded]
         self.bot_removed = self.observers[BotRemoved]
         self.bot_started = self.observers[BotStarted]

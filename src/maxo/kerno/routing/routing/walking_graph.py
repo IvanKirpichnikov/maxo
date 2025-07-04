@@ -12,14 +12,17 @@ from maxo.kerno.types.updates.update import Update
 
 def resolve_middlewares(
     router: RouterProtocol,
-    middlewares_map: MutableMapping[type[BaseUpdate], MutableSequence[Middleware[Any]]],
+    middlewares_map: MutableMapping[type[BaseUpdate], Sequence[Middleware[Any]]],
 ) -> None:
     update_observer = router.observers[Update]
+    update_middlewares = update_observer.inner_middleware.middlewares
+
     for update_tp, observer in router.observers.items():
-        middlewares = [
+        middlewares = (
             *middlewares_map[update_tp],
-            *update_observer.inner_middleware.middlewares,
-        ]
+            *update_middlewares,
+        )
+
         observer.inner_middleware(*middlewares)
         middlewares_map[update_tp] = copy(middlewares)
 
@@ -46,7 +49,7 @@ def walking_router_graph(
     router: RouterProtocol,
     used_updates: set[UpdateType],
     visited_routers: MutableSequence[RouterProtocol],
-    middlewares_map: MutableMapping[type[BaseUpdate], MutableSequence[Middleware[Any]]],
+    middlewares_map: MutableMapping[type[BaseUpdate], Sequence[Middleware[Any]]],
 ) -> Sequence[str]: ...
 
 
@@ -54,7 +57,7 @@ def walking_router_graph(
     router: RouterProtocol,
     used_updates: set[UpdateType] | None = None,
     visited_routers: MutableSequence[RouterProtocol] | None = None,
-    middlewares_map: MutableMapping[type[BaseUpdate], MutableSequence[Middleware[Any]]] | None = None,
+    middlewares_map: MutableMapping[type[BaseUpdate], Sequence[Middleware[Any]]] | None = None,
 ) -> Sequence[str]:
     if used_updates is None:
         used_updates = set()

@@ -1,9 +1,7 @@
-from contextlib import AbstractAsyncContextManager
 from types import TracebackType
 from typing import TypeVar
 
 from retejo import Method, bind_method
-from retejo.interfaces import AsyncSendableMethod
 from typing_extensions import Self
 
 from maxo.kerno.bot.api_client import MaxApiClient
@@ -45,11 +43,10 @@ from maxo.kerno.bot.state import (
 T = TypeVar("T")
 
 
-class Bot(
-    AsyncSendableMethod,
-    AbstractAsyncContextManager["Bot", "None"],
-):
+class Bot:
     state: BotState
+
+    __slots__ = ("_token", "_warming_up", "state")
 
     def __init__(
         self,

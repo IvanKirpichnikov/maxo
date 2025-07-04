@@ -7,6 +7,8 @@ from maxo.kerno.routing.filters.base import Filter
 
 
 class StateFilter(Filter[Any]):
+    __slots__ = ("_states",)
+
     def __init__(
         self,
         *states: State | StatesGroup | type[StatesGroup] | None | str,

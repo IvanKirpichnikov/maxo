@@ -12,6 +12,8 @@ E = TypeVar("E", bound=Exception)
 class ErrorFilter(Filter[ErrorEvent[E]], Generic[E]):
     _handler: Callable[[Any], bool]
 
+    __slots__ = ("_handler",)
+
     def __init__(
         self,
         error: type[E],

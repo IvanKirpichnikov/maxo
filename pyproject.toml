@@ -20,14 +20,16 @@ redis = ["redis~=6.0.0"]
 [dependency-groups]
 optionals = ["maxo[redis]"]
 lint = [
-    "mypy==1.16.0",
-    "ruff==0.11.13",
+    "mypy~=1.16.0",
+    "ruff~=0.11.13",
+    "codespell~=2.4.1",
+    "bandit~=1.8.5",
+    "slotscheck~=0.19.1",
 ]
 dev = [
     { include-group = "optionals"},
     { include-group = "lint" },
 ]
-
 
 [tool.mypy]
 files = ["src", "examples"]
@@ -42,6 +44,7 @@ include = [
     "examples/**.py",
     "pyproject.toml",
 ]
+fix = true
 line-length = 120
 target-version = "py310"
 

@@ -5,7 +5,6 @@ from typing_extensions import dataclass_transform
 
 
 @dataclass_transform(
-    eq_default=False,
     frozen_default=True,
     kw_only_default=True,
 )
@@ -16,12 +15,15 @@ class _MaxoTypeMetaClass(type):
         bases: tuple[Any, ...],
         namespace: dict[str, Any],
     ) -> Any:
-        new_class = super().__new__(cls, name, bases, namespace)
+        class_ = super().__new__(cls, name, bases, namespace)
+        if "__slots__" in namespace:
+            return class_
+
         return dataclass(
+            slots=True,
             frozen=True,
-            eq=False,
             kw_only=True,
-        )(new_class)
+        )(class_)
 
 
 class MaxoType(metaclass=_MaxoTypeMetaClass):

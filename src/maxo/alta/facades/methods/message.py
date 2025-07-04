@@ -110,7 +110,7 @@ class MessageMethodsFacade(BaseMethodsFacade, ABC):
         disable_link_preview: Omittable[bool] = Omitted(),
     ) -> Message:
         if isinstance(media, UploadMedia):
-            media = [media]
+            media = (media,)
 
         return await self.send_message(
             text=text,

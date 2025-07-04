@@ -8,6 +8,8 @@ from maxo.alta.state.state import State
 
 
 class Storage(Protocol):
+    __slots__ = ()
+
     @abstractmethod
     async def set_state(
         self,

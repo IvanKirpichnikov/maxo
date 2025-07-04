@@ -8,16 +8,20 @@ from maxo.kerno.routing.filters.base import Filter
 
 @final
 class MagicData(Filter[Any]):
+    __slots__ = ("_magic_filter",)
+
     def __init__(self, magic_filter: OriginMagicFilter) -> None:
-        self.magic_filter = magic_filter
+        self._magic_filter = magic_filter
 
     async def execute(self, update: Any, ctx: Ctx[Any]) -> bool:
-        result = self.magic_filter.resolve(AttrDict({"update": ctx.update, **ctx.data}))
+        result = self._magic_filter.resolve(AttrDict({"update": ctx.update, **ctx.data}))
         return cast("bool", result)
 
 
 @final
 class MagicFilter(Filter[Any]):
+    __slots__ = ("_magic_filter", "_save_key")
+
     def __init__(
         self,
         magic_filter: OriginMagicFilter,

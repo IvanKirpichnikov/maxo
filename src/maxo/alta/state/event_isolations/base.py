@@ -7,6 +7,8 @@ from maxo.alta.state.key_builder import StorageKey
 
 
 class EventIsolation(Protocol):
+    __slots__ = ()
+
     @abstractmethod
     @asynccontextmanager
     async def lock(self, key: StorageKey) -> AsyncIterator[None]:

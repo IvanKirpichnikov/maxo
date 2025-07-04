@@ -9,6 +9,13 @@ from maxo.omit import Omittable, is_omitted
 
 
 class ChatsIterator(AsyncIterator[Chat]):
+    __slots__ = (
+        "_bot",
+        "_chats",
+        "_count",
+        "_marker",
+    )
+
     def __init__(
         self,
         bot: Bot,
