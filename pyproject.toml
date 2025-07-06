@@ -10,8 +10,7 @@ requires-python = ">=3.10"
 dependencies = [
     "anyio~=4.9.0",
     "magic_filter~=1.0.12",
-    "typing-extensions~=4.14.0",
-    "retejo[aiohttp, adaptix] @ git+https://github.com/IvanKirpichnikov/retejo.git@develop",
+    "retejo[aiohttp] @ git+https://github.com/IvanKirpichnikov/retejo.git@develop",
 ]
 
 [project.optional-dependencies]

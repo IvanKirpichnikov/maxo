@@ -1,18 +1,11 @@
 from datetime import datetime
 
 from adaptix import P, Retort, as_sentinel, dumper, loader
+from retejo.clients.aiohttp import AiohttpClient
 from retejo.errors import ServerError
-from retejo.integrations.adaptix._omit_provider import OmitOmittedFieldProvider
-from retejo.integrations.adaptix.aiohttp import AiohttpAdaptixClient
-from retejo.integrations.common.base import MarkersFactorties
 from retejo.interfaces import Response
-from retejo.markers import (
-    BodyMarker,
-    HeaderMarker,
-    Omitted,
-    QueryParamMarker,
-    UrlVarMarker,
-)
+from retejo.markers import Omitted, QueryParamMarker
+from retejo.utils.predicates.for_marker import ForMarkerPredicate
 
 from maxo._adaptix.has_tag_provider import has_tag_provider
 from maxo.errors.api import (
@@ -24,7 +17,7 @@ from maxo.errors.api import (
     MaxBotUnauthorizedError,
     MaxVotForbiddenError,
 )
-from maxo.kerno.bot.warming_up import warming_up_retort
+from maxo.kerno.bot.warming_up import WarmingUpType, warming_up_retort
 from maxo.kerno.types.enums.attachment_request_type import AttachmentRequestType
 from maxo.kerno.types.enums.attachment_type import AttachmentType
 from maxo.kerno.types.enums.keyboard_button_type import KeyboardButtonType
@@ -147,7 +140,7 @@ _has_tag_providers = (
 )
 
 
-class MaxApiClient(AiohttpAdaptixClient):
+class MaxApiClient(AiohttpClient):
     def __init__(
         self,
         token: str,
@@ -159,36 +152,30 @@ class MaxApiClient(AiohttpAdaptixClient):
             headers={"Authorization": token},
         )
 
-    def init_markers_factories(self) -> MarkersFactorties[Retort]:
-        # markers_factories = super().init_markers_factories()
-        base_recipe = (
-            *_has_tag_providers,
-            as_sentinel(Omitted),
-            OmitOmittedFieldProvider(),
-            dumper(P[datetime], lambda x: x.timestamp() * 1000),
-        )
-        markers_factories: MarkersFactorties[Retort] = {}
-
-        common_retort = warming_up_retort(Retort(recipe=base_recipe), self._warming_up)
-        markers_factories[BodyMarker] = common_retort
-        markers_factories[UrlVarMarker] = common_retort
-        markers_factories[HeaderMarker] = common_retort
-        markers_factories[QueryParamMarker] = common_retort.extend(recipe=[dumper(P[None], lambda x: "null")])
-
-        return markers_factories
-
-    def init_response_factory(self) -> Retort:
-        # retort = super().init_response_factory()
+    def init_method_dumper(self) -> Retort:
         return warming_up_retort(
-            Retort(
+            super().init_method_dumper().extend(
+                recipe=[
+                    *_has_tag_providers,
+                    dumper(
+                        P[None] & ForMarkerPredicate(QueryParamMarker),
+                        lambda x: "null",
+                    ),
+                ]
+            ),
+            warming_up=WarmingUpType.METHOD if self._warming_up else None
+        )
+
+    def init_response_loader(self) -> Retort:
+        return warming_up_retort(
+            super().init_response_loader().extend(
                 recipe=(
                     *_has_tag_providers,
                     loader(P[datetime], lambda x: datetime.fromtimestamp(x / 1000)),
                     as_sentinel(Omitted),
-                    OmitOmittedFieldProvider(),
                 ),
             ),
-            self._warming_up,
+            warming_up=WarmingUpType.TYPE if self._warming_up else None
         )
 
     async def _handle_error_response(self, response: Response) -> None:
