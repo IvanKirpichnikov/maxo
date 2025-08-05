@@ -1,6 +1,9 @@
-from maxo.errors.base import MaxoError, error
+from maxo.errors.base import MaxoError, maxo_error
 
 
-@error
+@maxo_error
 class StateError(MaxoError):
-    pass
+    message: str
+
+    def __str__(self) -> str:
+        return self.message

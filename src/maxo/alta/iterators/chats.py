@@ -1,11 +1,10 @@
 from collections import deque
 from collections.abc import AsyncIterator
+from typing import Self
 
-from typing_extensions import Self
-
-from maxo.kerno.bot.bot import Bot
-from maxo.kerno.types.types.chat import Chat
+from maxo.bot.bot import Bot
 from maxo.omit import Omittable, is_omitted
+from maxo.types.api.chat import Chat
 
 
 class ChatsIterator(AsyncIterator[Chat]):

@@ -1,7 +1,5 @@
 from dataclasses import dataclass
-from typing import TypeVar
-
-from typing_extensions import dataclass_transform
+from typing import TypeVar, dataclass_transform
 
 T = TypeVar("T")
 
@@ -9,11 +7,11 @@ T = TypeVar("T")
 @dataclass_transform(
     frozen_default=True,
 )
-def error(cls: type[T]) -> type[T]:
+def maxo_error(cls: type[T]) -> type[T]:
     return dataclass(
         frozen=True,
     )(cls)
 
 
-@error
+@maxo_error
 class MaxoError(Exception): ...

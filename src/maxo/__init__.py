@@ -1,11 +1,11 @@
-from maxo.kerno.bot.bot import Bot
-from maxo.kerno.routing.ctx import Ctx
-from maxo.kerno.routing.routing.dispatcher import Dispatcher
-from maxo.kerno.routing.routing.router import Router
+from maxo.alta.dispatcher import Dispatcher
+from maxo.bot.bot import Bot
+from maxo.routing.ctx import Ctx
+from maxo.routing.routers.simple import SimpleRouter
 
-__all__ = [
+__all__ = (
     "Bot",
     "Ctx",
     "Dispatcher",
-    "Router",
-]
+    "SimpleRouter",
+)

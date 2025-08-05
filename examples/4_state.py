@@ -3,14 +3,18 @@ import os
 
 from magic_filter import F
 
-from maxo import Bot, Dispatcher, Router
+from maxo import Bot, Dispatcher, SimpleRouter
 from maxo.alta.facades import MessageCreatedFacade
-from maxo.alta.state import State, StateManager, StatesGroup
-from maxo.kerno.routing.filters import CommandStart, MagicFilter, StateFilter
-from maxo.kerno.types import MessageCreated
-from maxo.kerno.types.enums import TextFormat
+from maxo.alta.long_polling.long_polling import LongPolling
+from maxo.alta.state_system import State, StateFilter, StateManager, StatesGroup
+from maxo.integrations.magic_filter import MagicFilter
+from maxo.routing.ctx import Ctx
+from maxo.routing.filters import CommandStart
+from maxo.routing.updates.message_created import MessageCreated
+from maxo.routing.utils import inline_ctx
+from maxo.types.enums import TextFormat
 
-router = Router(__name__)
+router = SimpleRouter(__name__)
 
 
 class UserRegistatorStatesGroup(StatesGroup):
@@ -19,8 +23,10 @@ class UserRegistatorStatesGroup(StatesGroup):
 
 
 @router.message_created(CommandStart())
+@inline_ctx
 async def start_handler(
     update: MessageCreated,
+    ctx: Ctx[MessageCreated],
     facade: MessageCreatedFacade,
     state_manager: StateManager,
 ) -> None:
@@ -30,8 +36,10 @@ async def start_handler(
 
 
 @router.message_created(MagicFilter(F.message.body.text) & StateFilter(UserRegistatorStatesGroup.INPUT_NAME))
+@inline_ctx
 async def input_name_handler(
     update: MessageCreated,
+    ctx: Ctx[MessageCreated],
     facade: MessageCreatedFacade,
     state_manager: StateManager,
 ) -> None:
@@ -53,8 +61,10 @@ async def input_name_handler(
 
 
 @router.message_created(MagicFilter(F.message.body.text) & StateFilter(UserRegistatorStatesGroup.INPUT_AGE))
+@inline_ctx
 async def input_age_handler(
     update: MessageCreated,
+    ctx: Ctx[MessageCreated],
     facade: MessageCreatedFacade,
     state_manager: StateManager,
 ) -> None:
@@ -85,9 +95,10 @@ async def input_age_handler(
 def main() -> None:
     bot = Bot(os.environ["TOKEN"])
     dispatcher = Dispatcher()
+
     dispatcher.include(router)
 
-    dispatcher.run_polling(bot)
+    LongPolling(dispatcher).run(bot)
 
 
 logging.basicConfig(level=logging.INFO)

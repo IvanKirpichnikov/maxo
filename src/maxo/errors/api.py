@@ -1,35 +1,39 @@
-from maxo.errors.base import MaxoError, error
+from maxo.errors.base import MaxoError, maxo_error
 
 
-@error
+@maxo_error
 class MaxBotApiError(MaxoError):
     code: str
     message: str
 
 
-@error
+@maxo_error
 class MaxBotBadRequestError(MaxBotApiError): ...
 
 
-@error
+@maxo_error
 class MaxVotForbiddenError(MaxBotApiError): ...
 
 
-@error
+@maxo_error
 class MaxBotUnauthorizedError(MaxBotApiError): ...
 
 
-@error
+@maxo_error
 class MaxBotNotFoundError(MaxBotApiError): ...
 
 
-@error
+@maxo_error
 class MaxBotMethodNotAllowedError(MaxBotApiError): ...
 
 
-@error
+@maxo_error
 class MaxBotTooManyRequestsError(MaxBotApiError): ...
 
 
-@error
+@maxo_error
 class MaxBotServiceUnavailableError(MaxBotApiError): ...
+
+
+@maxo_error
+class RetvalReturnedServerException(MaxoError): ...  # noqa: N818

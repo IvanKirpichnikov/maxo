@@ -1,10 +1,10 @@
-from retejo.errors import ClientLibraryError
-from retejo.file_obj import FileObj
-from retejo.markers import is_defined
+from retejo.http.entities import FileObj
 
-from maxo.kerno.bot.bot import Bot
-from maxo.kerno.types.method_results.upload_media import UploadMediaResult
-from maxo.kerno.types.upload_media import UploadMedia
+from maxo.alta.upload_media import UploadMedia
+from maxo.bot.bot import Bot
+from maxo.bot.method_results.upload.upload_media import UploadMediaResult
+from maxo.errors.api import RetvalReturnedServerException
+from maxo.omit import is_defined
 
 
 class UploadMediaFacade:
@@ -29,7 +29,7 @@ class UploadMediaFacade:
                     filename=upload_media.file_name,
                 ),
             )
-        except ClientLibraryError:
+        except RetvalReturnedServerException:
             upload_result = None
 
         if is_defined(result.token):

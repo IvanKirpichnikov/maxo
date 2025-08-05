@@ -6,18 +6,21 @@ build-backend = "uv_build"
 name = "maxo"
 description = "Modern framework for max bots"
 version = "0.0.1"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     "anyio~=4.9.0",
-    "magic_filter~=1.0.12",
+    "typing-extensions>=4.11.0",
     "retejo[aiohttp] @ git+https://github.com/IvanKirpichnikov/retejo.git@develop",
 ]
 
 [project.optional-dependencies]
 redis = ["redis~=6.0.0"]
+magic_filter = ["magic_filter~=1.0.0"]
+diska = ["dishka~=1.0.0"]
+all = ["maxo[redis, magic_filter, dishka]"]
 
 [dependency-groups]
-optionals = ["maxo[redis]"]
+optionals = ["maxo[all]"]
 lint = [
     "mypy~=1.16.0",
     "ruff~=0.11.13",
@@ -35,7 +38,6 @@ files = ["src", "examples"]
 strict = true
 strict_bytes = true
 local_partial_types = true
-sqlite_cache = false
 
 [tool.ruff]
 include = [
@@ -44,7 +46,7 @@ include = [
     "pyproject.toml",
 ]
 fix = true
-line-length = 120
+line-length = 100
 target-version = "py310"
 
 [tool.ruff.lint]
@@ -71,6 +73,7 @@ select = [
 ]
 
 ignore = [
+    "RUF002",
     "RUF009", # Do not call in dataclass defaults
 
     "B008",  # Do not call in dataclass defaults

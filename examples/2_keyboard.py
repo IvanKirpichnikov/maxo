@@ -3,18 +3,23 @@ import os
 
 from magic_filter import F
 
-from maxo import Bot, Dispatcher, Router
+from maxo import Bot, Ctx, Dispatcher, SimpleRouter
 from maxo.alta.builders import KeyboardBuilder
 from maxo.alta.facades import MessageCallbackFacade, MessageCreatedFacade
-from maxo.kerno.routing.filters import CommandStart, MagicFilter
-from maxo.kerno.types import MessageCallback, MessageCreated
+from maxo.alta.long_polling.long_polling import LongPolling
+from maxo.integrations.magic_filter import MagicFilter
+from maxo.routing.filters import CommandStart
+from maxo.routing.updates import MessageCallback, MessageCreated
+from maxo.routing.utils import inline_ctx
 
-router = Router(__name__)
+router = SimpleRouter()
 
 
 @router.message_created(CommandStart())
+@inline_ctx
 async def start_handler(
     update: MessageCreated,
+    ctx: Ctx[MessageCreated],
     facade: MessageCreatedFacade,
 ) -> None:
     keyboard = (
@@ -40,8 +45,10 @@ async def start_handler(
 
 
 @router.message_callback(MagicFilter(F.callback_id == "click_me"))
+@inline_ctx
 async def click_me_handler(
     update: MessageCallback,
+    ctx: Ctx[MessageCallback],
     facade: MessageCallbackFacade,
 ) -> None:
     await facade.callback_answer("Ты кликнул на меня")
@@ -52,7 +59,7 @@ def main() -> None:
     dispatcher = Dispatcher()
     dispatcher.include(router)
 
-    dispatcher.run_polling(bot)
+    LongPolling(dispatcher).run(bot)
 
 
 logging.basicConfig(level=logging.INFO)

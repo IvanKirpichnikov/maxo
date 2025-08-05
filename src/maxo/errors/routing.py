@@ -1,14 +1,20 @@
-from typing import Sequence
+from typing import TYPE_CHECKING, Sequence
 
-from maxo.errors.base import MaxoError, error
-from maxo.kerno.routing.routing.router import RouterProtocol
+from maxo.errors.base import MaxoError, maxo_error
+
+if TYPE_CHECKING:
+    from maxo.routing.interfaces.router import Router
 
 
-@error
+@maxo_error
 class CycleRoutersError(MaxoError):
-    routers: Sequence[RouterProtocol]
+    routers: Sequence["Router"]
 
-    def _generate_details(self) -> str:
+    def __str__(self) -> str:
+        details = self._render_details()
+        return f"Cycle routers detected.\n{details}"
+
+    def _render_details(self) -> str:
         routers = self.routers
 
         if len(routers) == 1:
@@ -25,7 +31,3 @@ class CycleRoutersError(MaxoError):
         details += "╰─<─╯"
 
         return details
-
-    def __str__(self) -> str:
-        details = self._generate_details()
-        return f"Cycle routers detected.\n{details}"

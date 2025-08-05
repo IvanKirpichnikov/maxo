@@ -4,12 +4,11 @@ from typing import Any
 
 from maxo import Bot, Ctx, Dispatcher
 from maxo.alta.facades import MessageCreatedFacade
-from maxo.kerno.routing.filters import Filter
-from maxo.kerno.routing.middlewares import Middleware, NextMiddleware
-from maxo.kerno.types import MessageCreated
-
-bot = Bot(os.environ["TOKEN"])
-dispatcher = Dispatcher()
+from maxo.alta.long_polling.long_polling import LongPolling
+from maxo.routing.filters.base import BaseFilter
+from maxo.routing.interfaces.middleware import Middleware, NextMiddleware
+from maxo.routing.updates.message_created import MessageCreated
+from maxo.routing.utils.inline_ctx import inline_ctx
 
 
 class OuterMiddleware(Middleware[MessageCreated]):
@@ -38,7 +37,7 @@ class InnerMiddleware(Middleware[MessageCreated]):
         return result
 
 
-class ContainsTextFilter(Filter[MessageCreated]):
+class ContainsTextFilter(BaseFilter[MessageCreated]):
     def __init__(self, text: str) -> None:
         self._text = text
 
@@ -55,17 +54,21 @@ class ContainsTextFilter(Filter[MessageCreated]):
         return self._text in update.message.body.text
 
 
-dispatcher.message_created.inner_middleware(InnerMiddleware())
-dispatcher.message_created.outer_middleware(InnerMiddleware())
+dispatcher = Dispatcher()
+dispatcher.message_created.middleware.inner(InnerMiddleware())
+dispatcher.message_created.middleware.outer(InnerMiddleware())
 
 
 @dispatcher.message_created((ContainsTextFilter("gojo") & ContainsTextFilter("maki")) | ContainsTextFilter("sukuna"))
+@inline_ctx
 async def echo_handler(
     update: MessageCreated,
+    ctx: Ctx[MessageCreated],
     facade: MessageCreatedFacade,
 ) -> None:
     print("Исполнение хендлера")  # noqa: T201
 
 
 logging.basicConfig(level=logging.INFO)
-dispatcher.run_polling(bot)
+bot = Bot(os.environ["TOKEN"])
+LongPolling(dispatcher).run(bot)

@@ -1,7 +1,7 @@
 from maxo.alta.facades.methods.message import MessageMethodsFacade
 from maxo.alta.facades.updates.base import BaseUpdateFacade
-from maxo.kerno.types.types.message import Message
-from maxo.kerno.types.updates.message_created import MessageCreated
+from maxo.routing.updates.message_created import MessageCreated
+from maxo.types.api.message import Message
 
 
 class MessageCreatedFacade(

@@ -1,12 +1,10 @@
 from collections import deque
-from collections.abc import AsyncIterator, Iterable
-from typing import cast, overload
+from collections.abc import AsyncIterator
+from typing import Self, Sequence, cast
 
-from typing_extensions import Self
-
-from maxo.kerno.bot.bot import Bot
-from maxo.kerno.types.types.chat_member import ChatMember
+from maxo.bot.bot import Bot
 from maxo.omit import Omittable, Omitted
+from maxo.types.api.chat_member import ChatMember
 
 
 class ChatMembersIterator(AsyncIterator[ChatMember]):
@@ -22,31 +20,11 @@ class ChatMembersIterator(AsyncIterator[ChatMember]):
         "_user_ids",
     )
 
-    @overload
     def __init__(
         self,
         bot: Bot,
         chat_id: int,
-        user_ids: Iterable[int],
-        marker: Omittable[int] = Omitted(),
-        count: Omittable[int] = Omitted(),
-    ) -> None: ...
-
-    @overload
-    def __init__(
-        self,
-        bot: Bot,
-        chat_id: int,
-        user_ids: Omittable[None] = Omitted(),
-        marker: Omittable[int] = Omitted(),
-        count: Omittable[int] = 20,
-    ) -> None: ...
-
-    def __init__(
-        self,
-        bot: Bot,
-        chat_id: int,
-        user_ids: Omittable[Iterable[int] | None] = Omitted(),
+        user_ids: Omittable[Sequence[int] | None] = Omitted(),
         marker: Omittable[int] = Omitted(),
         count: Omittable[int] = 20,
     ) -> None:

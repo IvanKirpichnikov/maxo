@@ -1,3 +1,3 @@
 from logging import getLogger
 
-dispatching = getLogger("maxo.dispatching")
+dispatcher = getLogger("maxo.dispatcher")

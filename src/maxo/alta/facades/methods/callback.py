@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
 
 from maxo.alta.facades.methods.base import BaseMethodsFacade
-from maxo.kerno.types.method_results.method import MethodResult
-from maxo.kerno.types.types.callback import Callback
-from maxo.kerno.types.types.new_message_body import NewMessageBody
+from maxo.bot.method_results.messages.callback_answer import CallbackAnswerResult
 from maxo.omit import Omittable, Omitted
+from maxo.types.api.callback import Callback
+from maxo.types.api.new_message_body import NewMessageBody
 
 
 class CallbackMethodsFacade(BaseMethodsFacade, ABC):
@@ -17,7 +17,7 @@ class CallbackMethodsFacade(BaseMethodsFacade, ABC):
         self,
         notification: Omittable[str | None] = Omitted(),
         message: NewMessageBody | None = None,
-    ) -> MethodResult:
+    ) -> CallbackAnswerResult:
         return await self.bot.callback_answer(
             callback_id=self.callback.callback_id,
             notification=notification,

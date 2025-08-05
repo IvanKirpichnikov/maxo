@@ -6,20 +6,16 @@ from collections.abc import (
 )
 from copy import deepcopy
 from itertools import chain, cycle
-from typing import ClassVar, TypeVar
+from typing import ClassVar, Self, TypeVar
 
-from typing_extensions import Self
-
-from maxo.kerno.types.enums.intent import IntentType
-from maxo.kerno.types.types.keyboard_buttons import (
-    CallbackKeyboardButton,
-    ChatKeyboardButton,
-    KeyboardButtons,
-    LinkKeyboardButton,
-    RequestContactKeyboardButton,
-    RequestGeoLocationKeyboardButton,
-)
 from maxo.omit import Omittable, Omitted
+from maxo.types.api.callback_keyboard_button import CallbackKeyboardButton
+from maxo.types.api.chat_keyboard_button import ChatKeyboardButton
+from maxo.types.api.keyboard_buttons import KeyboardButtons
+from maxo.types.api.link_keyboard_button import LinkKeyboardButton
+from maxo.types.api.request_contact_keyboard_button import RequestContactKeyboardButton
+from maxo.types.api.request_geo_location_button import RequestGeoLocationKeyboardButton
+from maxo.types.enums.intent import IntentType
 
 T = TypeVar("T")
 
